@@ -1,15 +1,15 @@
-=== Swiss QR Bill ===
-Contributors: swissplugins
+=== Advanced Swiss QR Bill ===
+Contributors: rocketsky
 Donate link:
 Tags: woocommerce, swiss, switzerland, qr, qr bill, qr invoice, qr code, bill, billing, invoice, invoicing
 Requires at least: 4.6
 Tested up to: 5.8
 Requires PHP: 7.0
-Stable tag: 1.2.4
+Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Swiss QR Bill extends WooCommerce with a new payment method, allowing you to easily send automated and standardized Swiss QR bills to your clients.
+Advanced Swiss QR Bill extends WooCommerce with a new payment method, allowing you to easily send automated and standardized Swiss QR bills to your clients.
 
 == Description ==
 
