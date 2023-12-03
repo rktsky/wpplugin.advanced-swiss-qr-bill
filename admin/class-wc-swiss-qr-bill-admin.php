@@ -326,7 +326,7 @@ class WC_Swiss_Qr_Bill_Admin
         new WC_Swiss_Qr_Bill_Generate(WC()->payment_gateways()->payment_gateways()[$payment_method]);
 
         // Get payment gateway setting option for this particular order
-        $gateway_options = get_post_meta($order->get_id(), '_wsqb_gateway_data', true);
+        $gateway_options = $order->get_meta( '_wsqb_gateway_data', true );
 
         do_action('invoice_generate', sanitize_text_field($order->get_id()), unserialize($gateway_options));
     }

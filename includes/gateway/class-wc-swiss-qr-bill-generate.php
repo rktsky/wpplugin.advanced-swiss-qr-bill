@@ -412,8 +412,8 @@ class WC_Swiss_Qr_Bill_Generate {
             $tcPdf->Output($this->pdf_mode == 'F' ? $invoice_pdf : $pdf_name, $this->pdf_mode);
             $this->invoice_pdf = $invoice_pdf;
 
-            update_post_meta($order->get_id(), '_wsqb_invoice_pdf_path', $pdf_name);
-            update_post_meta($order->get_id(), '_wsqb_gateway_data', serialize($this->invoice_data['options']));
+            $order->update_meta_data( '_wsqb_invoice_pdf_path', $pdf_name );
+            $order->update_meta_data( '_wsqb_gateway_data', serialize($this->invoice_data['options']) );
         } catch (Exception $e) {
             echo $e->getMessage();
         }
@@ -442,7 +442,7 @@ class WC_Swiss_Qr_Bill_Generate {
         $allowed_statuses = array('customer_processing_order', 'customer_on_hold_order', 'customer_note', 'customer_invoice');
 
         if (isset($id) && in_array($id, $allowed_statuses)) {
-            $file_name = get_post_meta($order->get_id(), '_wsqb_invoice_pdf_path', 'true');
+	        $file_name = $order->get_meta( '_wsqb_invoice_pdf_path', true );
             if (file_exists(WC_SWISS_QR_BILL_UPLOAD_DIR . $file_name)) {
                 $attachments[] = WC_SWISS_QR_BILL_UPLOAD_DIR . $file_name;
             }
@@ -670,7 +670,9 @@ class WC_Swiss_Qr_Bill_Generate {
             return;
         }
 
-        $file_name = get_post_meta($order_id, '_wsqb_invoice_pdf_path', 'true');
+		$order = wc_get_order($order_id);
+		$file_name = $order->get_meta( '_wsqb_invoice_pdf_path', true );
+
         if (file_exists(WC_SWISS_QR_BILL_UPLOAD_DIR . $file_name)) {
             wp_delete_file(WC_SWISS_QR_BILL_UPLOAD_DIR . $file_name);
         }
